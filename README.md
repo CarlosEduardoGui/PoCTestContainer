@@ -117,7 +117,3 @@ O arquivo docker-compose.yml já está configurado para subir uma instância do 
 
 ### Contribuições
 Sinta-se à vontade para abrir um PR ou enviar sugestões de melhorias.
-
-### Alterações:
-- **NUnit** substituiu o **xUnit** nos exemplos de teste.
-- Adicionei a instrução de subir o **SQL Server** localmente usando **docker-compose** antes de rodar os testes.
