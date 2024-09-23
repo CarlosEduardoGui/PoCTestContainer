@@ -1,6 +1,6 @@
-# PoC TestContainers
+ï»¿# PoC TestContainers
 
-Este repositório contém uma Prova de Conceito (PoC) para explorar o uso de **Testcontainers** em um ambiente de testes automatizados. A aplicação é construída em .NET e utiliza o **NUnit** para a execução dos testes de integração, demonstrando como criar e gerenciar containers Docker durante os testes.
+Este repositÃ³rio contÃ©m uma Prova de Conceito (PoC) para explorar o uso de **Testcontainers** em um ambiente de testes automatizados. A aplicaÃ§Ã£o Ã© construÃ­da em .NET e utiliza o **NUnit** para a execuÃ§Ã£o dos testes de integraÃ§Ã£o, demonstrando como criar e gerenciar containers Docker durante os testes.
 
 ## Tecnologias Utilizadas
 
@@ -11,25 +11,25 @@ Este repositório contém uma Prova de Conceito (PoC) para explorar o uso de **Tes
 - **Docker Compose**
 - **NUnit**
 
-## O que é Testcontainers?
+## O que Ã© Testcontainers?
 
-[Testcontainers](https://www.testcontainers.org/) é uma biblioteca leve que suporta a execução de containers Docker durante testes automatizados, permitindo a criação de ambientes reais de banco de dados e outros serviços. Isso facilita a configuração de testes de integração com alta confiabilidade e simplicidade.
+[Testcontainers](https://www.testcontainers.org/) Ã© uma biblioteca leve que suporta a execuÃ§Ã£o de containers Docker durante testes automatizados, permitindo a criaÃ§Ã£o de ambientes reais de banco de dados e outros serviÃ§os. Isso facilita a configuraÃ§Ã£o de testes de integraÃ§Ã£o com alta confiabilidade e simplicidade.
 
 ### Vantagens do Testcontainers:
-- **Isolamento**: Cada teste tem seu próprio ambiente de execução, com containers independentes.
-- **Flexibilidade**: Suporta diversos serviços como bancos de dados, filas, entre outros.
-- **Simplicidade**: Gerencia os containers automaticamente, sem a necessidade de configurações manuais.
+- **Isolamento**: Cada teste tem seu prÃ³prio ambiente de execuÃ§Ã£o, com containers independentes.
+- **Flexibilidade**: Suporta diversos serviÃ§os como bancos de dados, filas, entre outros.
+- **Simplicidade**: Gerencia os containers automaticamente, sem a necessidade de configuraÃ§Ãµes manuais.
 
 ## Como Funciona o Projeto
 
 Este projeto demonstra o uso de Testcontainers para:
 1. Criar e gerenciar containers Docker dinamicamente durante os testes.
-2. Executar testes de integração que interagem com um **Microsoft SQL Server** rodando em um container.
-3. Limpar os containers após a execução dos testes, garantindo que o ambiente permaneça consistente.
+2. Executar testes de integraÃ§Ã£o que interagem com um **Microsoft SQL Server** rodando em um container.
+3. Limpar os containers apÃ³s a execuÃ§Ã£o dos testes, garantindo que o ambiente permaneÃ§a consistente.
 
-### Exemplo de Teste de Integração com Testcontainers (NUnit)
+### Exemplo de Teste de IntegraÃ§Ã£o com Testcontainers (NUnit)
 
-Aqui está um exemplo de como os testes de integração foram configurados usando NUnit e Testcontainers:
+Aqui estÃ¡ um exemplo de como os testes de integraÃ§Ã£o foram configurados usando NUnit e Testcontainers:
 
 ```csharp
 using NUnit.Framework;
@@ -63,35 +63,35 @@ namespace IntegrationTests
             using var connection = new SqlConnection(_mssqlContainer.GetConnectionString());
             await connection.OpenAsync();
 
-            // Exemplo de teste: Verificar se a conexão com o banco de dados está aberta
+            // Exemplo de teste: Verificar se a conexÃ£o com o banco de dados estÃ¡ aberta
             connection.State.Should().Be(System.Data.ConnectionState.Open);
         }
     }
 }
 ```
 
-Neste exemplo, usamos o Testcontainers para iniciar um container com SQL Server para um teste de conexão ao banco de dados. O container é iniciado antes dos testes e finalizado automaticamente após a execução.
+Neste exemplo, usamos o Testcontainers para iniciar um container com SQL Server para um teste de conexÃ£o ao banco de dados. O container Ã© iniciado antes dos testes e finalizado automaticamente apÃ³s a execuÃ§Ã£o.
 
 ### Executando o Projeto
 
 ## Subindo o SQL Server com Docker Compose
-Antes de rodar o projeto, é necessário subir o SQL Server localmente usando o docker-compose. Para isso, execute o seguinte comando na raiz do projeto:
+Antes de rodar o projeto, Ã© necessÃ¡rio subir o SQL Server localmente usando o docker-compose. Para isso, execute o seguinte comando na raiz do projeto:
 ```bash
     docker-compose up -d
 ```
-O arquivo docker-compose.yml já está configurado para subir uma instância do SQL Server.
+O arquivo docker-compose.yml jÃ¡ estÃ¡ configurado para subir uma instÃ¢ncia do SQL Server.
 
 ## Executando os Testes
-1. Certifique-se de ter o **Docker** instalado e em execução.
-2. Clone o repositório:
+1. Certifique-se de ter o **Docker** instalado e em execuÃ§Ã£o.
+2. Clone o repositÃ³rio:
 ```bash
     git clone https://github.com/CarlosEduardoGui/PoCTestContainer.git
 ```
-3. Navegue até o diretório do projeto:
+3. Navegue atÃ© o diretÃ³rio do projeto:
 ```bash
     cd PoCTestContainer
 ```
-4. Restaure as dependências do projeto:
+4. Restaure as dependÃªncias do projeto:
 ```bash
    dotnet restore
 ```
@@ -102,12 +102,12 @@ O arquivo docker-compose.yml já está configurado para subir uma instância do SQL
 
 ### Estrutura do Projeto
 ```bash
-??? PoCTestContainer/
-?   ??? src/              # Código da aplicação
-?   ??? docker-compose.yml # Configuração do SQL Server local
-?   ??? tests/            # Testes automatizados
-?       ??? Integration/  # Testes de integração com uso de containers Docker
-?       ??? Unit/         # Testes unitários
+â”œâ”€â”€ PoCTestContainer/
+â”‚   â”œâ”€â”€ src/              # CÃ³digo da aplicaÃ§Ã£o
+â”‚   â”œâ”€â”€ docker-compose.yml # ConfiguraÃ§Ã£o do SQL Server local
+â”‚   â””â”€â”€ tests/            # Testes automatizados
+â”‚       â”œâ”€â”€ Integration/  # Testes de integraÃ§Ã£o com uso de containers Docker
+â”‚       â””â”€â”€ Unit/         # Testes unitÃ¡rios
 ```
 
 ### Requisitos
@@ -115,9 +115,9 @@ O arquivo docker-compose.yml já está configurado para subir uma instância do SQL
 - [Docker](https://docs.docker.com/desktop/install/windows-install/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-### Contribuições
-Sinta-se à vontade para abrir um PR ou enviar sugestões de melhorias.
+### ContribuiÃ§Ãµes
+Sinta-se Ã  vontade para abrir um PR ou enviar sugestÃµes de melhorias.
 
-### Alterações:
+### AlteraÃ§Ãµes:
 - **NUnit** substituiu o **xUnit** nos exemplos de teste.
-- Adicionei a instrução de subir o **SQL Server** localmente usando **docker-compose** antes de rodar os testes.
+- Adicionei a instruÃ§Ã£o de subir o **SQL Server** localmente usando **docker-compose** antes de rodar os testes.
