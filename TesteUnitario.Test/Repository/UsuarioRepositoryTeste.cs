@@ -71,7 +71,7 @@ public class UsuarioRepositoryTeste
             .Returns(1);
         var repositorio = new UsuarioRepository(_sqlInterface);
 
-        var usuarioAtualizado = await repositorio.AtualizarUsuario(usuario);
+        var usuarioAtualizado = await repositorio.Atualizar(usuario);
 
         Assert.Multiple(() =>
         {

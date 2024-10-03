@@ -33,11 +33,18 @@ public abstract class EndToEndTest : IClassFixture<CustomApiFactory>, IDisposabl
         }
     }
 
-    public async Task InserirUsuario(Usuario usuario) 
+    public CriarEEditarUsuario AtualizarDadoUsuario()
+        => new()
+        {
+            Nome = _faker.Name.FirstName(),
+            Sobrenome = _faker.Name.LastName()
+        };
+
+    public async Task<Usuario> InserirUsuario(Usuario usuario)
         => await _usuarioRepository.Inserir(usuario);
 
     public Usuario CriarUsuario()
-        => new(_faker.Name.FindName(), _faker.Name.LastName());
+        => new(_faker.Name.FirstName(), _faker.Name.LastName());
 
     private IEnumerable<Usuario> CriarUsuarios()
         => Enumerable

@@ -23,7 +23,7 @@ public class UsuariosController : ControllerBase
         return Ok(usuarios);
     }
 
-    [HttpPost("atualizar")]
+    [HttpPut("atualizar")]
     public async Task<IActionResult> AlterarUsuario([FromQuery] int id, [FromBody] CriarEEditarUsuario novoUsuario)
     {
         var usuario = await _usuarioRepositorio.Buscar(id);
@@ -32,9 +32,9 @@ public class UsuariosController : ControllerBase
 
         usuario.MudarNomeESobrenome(novoUsuario.Nome, novoUsuario.Sobrenome);
 
-        await _usuarioRepositorio.AtualizarUsuario(usuario);
+        await _usuarioRepositorio.Atualizar(usuario);
 
-        return Ok(usuario);
+        return NoContent();
     }
 
     [HttpPost("inserir")]
@@ -45,5 +45,17 @@ public class UsuariosController : ControllerBase
         var usuarioInserido = await _usuarioRepositorio.Inserir(usuario);
 
         return Created("/id", usuarioInserido.Id);
+    }
+
+    [HttpDelete("excluir")]
+    public async Task<IActionResult> ExcluirUsuario([FromQuery] int id)
+    {
+        var usuario = await _usuarioRepositorio.Buscar(id);
+        if (usuario == null)
+            return BadRequest($"Usuario {id} não existe.");
+
+        await _usuarioRepositorio.Excluir(usuario.Id);
+
+        return NoContent();
     }
 }

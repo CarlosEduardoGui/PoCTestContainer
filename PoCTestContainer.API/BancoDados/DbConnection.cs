@@ -17,7 +17,7 @@ public class DbConnection : ISqlInterface
 
     public async Task<int> Execute(string sql, object? parametros = null, CommandType? commandType = null)
     {
-        return await _connection.ExecuteAsync(sql, parametros);
+        return await _connection.ExecuteScalarAsync<int>(sql, parametros);
     }
 
     public async Task<IEnumerable<T>> QueryArrayResult<T>(string sql, object? parametros = null, int? commandTimeout = null)

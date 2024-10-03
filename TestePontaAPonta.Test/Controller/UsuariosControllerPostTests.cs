@@ -21,6 +21,14 @@ public class UsuariosControllerPostTests : EndToEndTest
         response.EnsureSuccessStatusCode();
         var responseString = await response.Content.ReadAsStringAsync();
         responseString.Should().NotBeNullOrEmpty();
-        var usuarios = JsonConvert.DeserializeObject<int>(responseString);
+        var usuarioId = JsonConvert.DeserializeObject<int>(responseString);
+        usuarioId.Should().Be(6);
+        var usuarioBancoDados = await _usuarioRepository.Buscar(usuarioId);
+        usuarioBancoDados.Should().NotBeNull();
+        usuarioBancoDados!.Id.Should().Be(usuarioId);
+        usuarioBancoDados.Nome.Should().Be(usuario.Nome);
+        usuarioBancoDados.Sobrenome.Should().Be(usuario.Sobrenome);
+        usuarioBancoDados.CriadoEm.Should().BeOnOrAfter(usuario.CriadoEm);
+        usuarioBancoDados.AtualizadoEm.Should().Be(usuario.AtualizadoEm);
     }
 }

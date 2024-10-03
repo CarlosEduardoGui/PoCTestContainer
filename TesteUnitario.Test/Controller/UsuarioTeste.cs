@@ -36,21 +36,32 @@ public class UsuarioTeste
         var controller = new UsuariosController(_usuarioRepostiroy);
 
         var objectResult = (CreatedResult)await controller.InserirUsuario(usuarioRequest);
-        
-        Assert.Multiple(() =>
+        var usuarioCriadoId = (int)objectResult.Value!;
+
+        Assert.Multiple(async () =>
         {
             Assert.That(objectResult.StatusCode, Is.EqualTo(StatusCodes.Status201Created));
             Assert.That(objectResult.Value, Is.EqualTo(1));
+            Assert.That(usuarioCriadoId, Is.EqualTo(usuario.Id));
+            await _usuarioRepostiroy
+                .Received(1)
+                .Inserir(Arg.Is<Usuario>(x =>
+                    x.Id == 0
+                    && x.Nome == usuario.Nome
+                    && x.Sobrenome == usuario.Sobrenome
+                    && x.CriadoEm != usuario.CriadoEm
+                    && x.AtualizadoEm == default
+                ));
         });
     }
 
     [Test]
     public async Task DadoQueAtualizarUsuario_QuandoUsuarioExistir_EntaoRetornarUsuarioAtualizado()
     {
-        var usuarioRequest = new CriarEEditarUsuario() 
-        { 
-            Nome = "Carlos", 
-            Sobrenome = "Guimaraes" 
+        var usuarioRequest = new CriarEEditarUsuario()
+        {
+            Nome = "Carlos",
+            Sobrenome = "Guimaraes"
         };
         var usuarioBuscado = new Usuario(usuarioRequest.Nome, usuarioRequest.Sobrenome)
         {
@@ -61,17 +72,7 @@ public class UsuarioTeste
             .Returns(usuarioBuscado);
         var controller = new UsuariosController(_usuarioRepostiroy);
 
-        var objectResult = (OkObjectResult)await controller.AlterarUsuario(usuarioBuscado.Id, usuarioRequest);
-        var usuarioAtualizado = (Usuario)objectResult.Value;
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(usuarioAtualizado.Id, Is.EqualTo(usuarioBuscado.Id));
-            Assert.That(usuarioAtualizado.Nome, Is.EqualTo(usuarioRequest.Nome));
-            Assert.That(usuarioAtualizado.Sobrenome, Is.EqualTo(usuarioRequest.Sobrenome));
-            Assert.That(usuarioAtualizado.CriadoEm, Is.Not.EqualTo(default(DateTime)));
-            Assert.That(usuarioAtualizado.AtualizadoEm, Is.Not.EqualTo(default(DateTime)));
-        });
+        await controller.AlterarUsuario(usuarioBuscado.Id, usuarioRequest);
     }
 
     [Test]

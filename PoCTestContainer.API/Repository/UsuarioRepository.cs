@@ -12,7 +12,7 @@ public class UsuarioRepository : IUsuarioRepository
         _sqlInterface = sqlInterface;
     }
 
-    public async Task<Usuario> AtualizarUsuario(Usuario usuario)
+    public async Task<Usuario> Atualizar(Usuario usuario)
     {
 
         await _sqlInterface.Execute("UPDATE Usuario SET Nome = @Nome, Sobrenome = @Sobrenome, AtualizadoEm = @AtualizadoEm", new { usuario.Nome, usuario.Sobrenome, usuario.AtualizadoEm });
@@ -25,11 +25,16 @@ public class UsuarioRepository : IUsuarioRepository
         return await _sqlInterface.QueryResult<Usuario>("SELECT * FROM Usuario WHERE Id = @id", new { id });
     }
 
+    public async Task Excluir(int id)
+    {
+        await _sqlInterface.Execute("DELETE FROM Usuario WHERE Id = @id", new { id });
+    }
+
     public async Task<Usuario> Inserir(Usuario usuario)
     {
         var idUsuario = await _sqlInterface.Execute(
             @"INSERT INTO Usuario(Nome, Sobrenome, CriadoEm, AtualizadoEm) VALUES (@Nome, @Sobrenome, @CriadoEm, NULL);
-                SELECT SCOPE_IDENTITY();",
+                SELECT IDENT_CURRENT('Usuario');",
             new { usuario.Nome, usuario.Sobrenome, usuario.CriadoEm });
 
         usuario.Id = idUsuario;
