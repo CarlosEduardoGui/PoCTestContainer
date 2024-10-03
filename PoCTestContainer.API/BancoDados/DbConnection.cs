@@ -9,7 +9,11 @@ public class DbConnection : ISqlInterface
     private readonly IDbConnection _connection;
 
     public DbConnection(IDbConnection connection)
-        => _connection = connection;
+    {
+        _connection = connection;
+        if (connection.State != ConnectionState.Open)
+            _connection.Open();
+    }
 
     public async Task<int> Execute(string sql, object? parametros = null, CommandType? commandType = null)
     {

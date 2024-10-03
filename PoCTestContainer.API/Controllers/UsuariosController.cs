@@ -5,17 +5,17 @@ using PoCTestContainer.API.Models;
 namespace PoCTestContainer.API.Controllers;
 
 [ApiController]
-[Route("[controller]/v1/api")]
-public class UsuarioController : ControllerBase
+[Route("[controller]/api/v1")]
+public class UsuariosController : ControllerBase
 {
     private readonly IUsuarioRepository _usuarioRepositorio;
 
-    public UsuarioController(IUsuarioRepository sqlInterface)
+    public UsuariosController(IUsuarioRepository sqlInterface)
     {
         _usuarioRepositorio = sqlInterface;
     }
 
-    [HttpGet]
+    [HttpGet("todos")]
     public async Task<IActionResult> Index()
     {
         var usuarios = await _usuarioRepositorio.ListarTodos();

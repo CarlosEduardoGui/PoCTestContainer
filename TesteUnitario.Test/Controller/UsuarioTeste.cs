@@ -33,7 +33,7 @@ public class UsuarioTeste
         _usuarioRepostiroy
             .Inserir(Arg.Any<Usuario>())
             .Returns(usuario);
-        var controller = new UsuarioController(_usuarioRepostiroy);
+        var controller = new UsuariosController(_usuarioRepostiroy);
 
         var objectResult = (CreatedResult)await controller.InserirUsuario(usuarioRequest);
         
@@ -59,7 +59,7 @@ public class UsuarioTeste
         _usuarioRepostiroy
             .Buscar(Arg.Any<int>())
             .Returns(usuarioBuscado);
-        var controller = new UsuarioController(_usuarioRepostiroy);
+        var controller = new UsuariosController(_usuarioRepostiroy);
 
         var objectResult = (OkObjectResult)await controller.AlterarUsuario(usuarioBuscado.Id, usuarioRequest);
         var usuarioAtualizado = (Usuario)objectResult.Value;
@@ -88,7 +88,7 @@ public class UsuarioTeste
         _usuarioRepostiroy
            .ListarTodos()
            .Returns(usuarios);
-        var repositorio = new UsuarioController(_usuarioRepostiroy);
+        var repositorio = new UsuariosController(_usuarioRepostiroy);
 
         var usuarioLista = await repositorio.Index();
 

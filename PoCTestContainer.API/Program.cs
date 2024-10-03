@@ -12,21 +12,21 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<IDbConnection>(imp => new SqlConnection(builder.Configuration.GetConnectionString("PoCTestContainer")));
-builder.Services.AddScoped<ISqlInterface, DbConnection>();
-builder.Services.AddScoped<ICriarBancoDados, CriarBancoDados>();
+builder.Services.AddSingleton<ISqlInterface, DbConnection>();
+
+if (builder.Environment.Equals("PontaAPonta") is false)
+{
+    builder.Services.AddScoped<ICriarBancoDados, CriarBancoDados>();
+
+    var serviceProvider = builder.Services.BuildServiceProvider();
+    var createDatabaseService = serviceProvider.GetService<ICriarBancoDados>();
+    createDatabaseService!.CriarBanco();
+}
+
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
-
-var serviceProvider = builder.Services.BuildServiceProvider();
-var createDatabaseService = serviceProvider.GetService<ICriarBancoDados>();
-
-if (createDatabaseService is null)
-    throw new NullReferenceException("Não foi possível recuperar um objeto de serviço para criação da estrutura relacional");
-
-createDatabaseService.CriarBanco();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -38,3 +38,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

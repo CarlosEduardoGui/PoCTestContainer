@@ -28,7 +28,8 @@ public class UsuarioRepository : IUsuarioRepository
     public async Task<Usuario> Inserir(Usuario usuario)
     {
         var idUsuario = await _sqlInterface.Execute(
-            "INSERT INTO Usuario(Nome, Sobrenome, CriadoEm, AtualizadoEm) VALUES (@Nome, @Sobrenome, @CriadoEm, NULL)",
+            @"INSERT INTO Usuario(Nome, Sobrenome, CriadoEm, AtualizadoEm) VALUES (@Nome, @Sobrenome, @CriadoEm, NULL);
+                SELECT SCOPE_IDENTITY();",
             new { usuario.Nome, usuario.Sobrenome, usuario.CriadoEm });
 
         usuario.Id = idUsuario;
