@@ -105,9 +105,9 @@ O arquivo docker-compose.yml já está configurado para subir uma instância do 
 ├── src/
 |   ├── PoCTestContainer.API/                      # Código da aplicação
 │       ├── docker-compose.yml                     # Configuração do SQL Server local
-│   └── tests/                                     # Testes automatizados
-│       ├── PoCTestContainer.EndToEnd.Test/        # Testes de integração com uso de containers Docker
-│       └── PoCTestContainer.Unit.Test/            # Testes unitários
+│── tests/                                         # Testes automatizados
+│   ├── PoCTestContainer.EndToEnd.Test/            # Testes de integração com uso de containers Docker
+│   └── PoCTestContainer.Unit.Test/                # Testes unitários
 ```
 
 ### Requisitos
