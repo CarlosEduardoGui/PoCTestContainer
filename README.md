@@ -112,7 +112,7 @@ O arquivo docker-compose.yml já está configurado para subir uma instância do 
 
 ### Requisitos
 - [.NET 6 SDK](https://dotnet.microsoft.com/pt-br/download/dotnet/6.0)
-- [Docker](https://docs.docker.com/desktop/install/windows-install/)
+- [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
 ### Contribuições
