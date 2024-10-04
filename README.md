@@ -89,7 +89,7 @@ O arquivo docker-compose.yml já está configurado para subir uma instância do 
 ```
 3. Navegue até o diretório do projeto:
 ```bash
-    cd PoCTestContainer
+    cd src/PoCTestContainer.API
 ```
 4. Restaure as dependências do projeto:
 ```bash
